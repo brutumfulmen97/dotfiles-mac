@@ -1,0 +1,102 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "(Workspace || Editor) &&  vim_mode == normal",
+    "bindings": {
+      "space e": "workspace::ToggleRightDock",
+      "space E": "workspace::ToggleLeftDock",
+      "space c a": "editor::ToggleCodeActions",
+      "g r": "editor::FindAllReferences",
+      "space ,": "tab_switcher::ToggleAll",
+      "cmd-h": "workspace::ActivatePaneLeft",
+      "cmd-l": "workspace::ActivatePaneRight",
+      "space g r": "editor::Rename",
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "cmd-h": "workspace::ActivatePaneLeft",
+      "cmd-l": "workspace::ActivatePaneRight",
+    },
+  },
+  {
+    "context": "(Workspace || Editor) &&  vim_mode == insert",
+    "bindings": {
+      "cmd-s": "workspace::Save",
+    },
+  },
+  {
+    "context": "(Workspace || Editor) && (vim_mode == insert)",
+    "bindings": {
+      "j j": "vim::SwitchToNormalMode",
+      "j k": "vim::SwitchToNormalMode",
+      "k k": "vim::SwitchToNormalMode",
+    },
+  },
+  {
+    "bindings": {
+      "ctrl-enter": "vim::InsertLineBelow",
+      "ctrl-shift-enter": "vim::InsertLineAbove",
+      "ctrl-shift-r": "projects::OpenRecent",
+      "ctrl-m ctrl-o": "workspace::Open",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "cmd-k": "editor::MoveLineUp",
+      "cmd-j": "editor::MoveLineDown",
+    },
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space h": "pane::SplitLeft",
+      "space l": "pane::SplitRight",
+      "shift-q": "pane::CloseActiveItem",
+    },
+  },
+  {
+    "context": "vim_mode == visual || vim_mode == normal",
+    "bindings": {
+      "k": "vim::Up",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "tab": "editor::Tab",
+    },
+  },
+  {
+    "context": "Editor && showing_completions",
+    "bindings": {
+      "tab": "editor::ComposeCompletion",
+    },
+  },
+  {
+    "context": "(VimControl && !menu) || vim_mode == replace || vim_mode == waiting",
+    "bindings": {
+      "tab": "vim::Tab",
+    },
+  },
+  {
+    "context": "vim_mode == literal",
+    "bindings": {
+      "tab": ["vim::Literal", ["tab", "\u0009"]],
+    },
+  },
+  {
+    "context": "vim_mode == visual || vim_mode == visual_line",
+    "bindings": {
+      "p": ["vim::Paste", { "preserve_clipboard": true }],
+    },
+  },
+]

@@ -1,0 +1,198 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[ ](color_transparrent)\
+[](color_orange)\
+$os\
+$username\
+[](fg:color_orange bg:color_orange_soft)\
+$directory\
+[](fg:color_orange_soft bg:color_mint)\
+$git_branch\
+$git_status\
+[](fg:color_mint bg:color_purple)\
+$c\
+$cpp\
+$rust\
+$golang\
+$nodejs\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+[](fg:color_purple bg:color_red)\
+$docker_context\
+$conda\
+$pixi\
+[](fg:color_red bg:color_bg3)\
+$time\
+[ ](fg:color_bg3)\
+$line_break$character"""
+
+palette = 'vesper'
+
+[palettes.vesper]
+color_transparrent = 'none'
+color_fg0 = '#fff2e6'
+color_bg1 = '#101010'
+color_bg2 = '#161616'
+color_bg3 = '#1c1c1c'
+color_orange = '#ffc799'
+color_orange_soft = '#ffcfa8'
+color_mint = '#99ffe4'
+color_mint_soft = '#c7fff0'
+color_purple = '#b08fc5'
+color_red = '#ff8080'
+color_gray = '#a0a0a0'
+color_green = '#99ffe4'
+color_yellow = '#ffc799'
+
+[os]
+disabled = true
+style = "bg:color_orange fg:color_fg0"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+EndeavourOS = ""
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+Pop = ""
+
+[username]
+show_always = false
+style_user = "bg:color_orange fg:color_fg0"
+style_root = "bg:color_orange fg:color_fg0"
+format = '[ $user ]($style)'
+
+[directory]
+style = "fg:color_bg1 bg:color_orange_soft"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+[git_branch]
+symbol = ""
+style = "bg:color_mint"
+format = '[[ $symbol $branch ](fg:color_bg1 bg:color_mint)]($style)'
+
+[git_status]
+style = "bg:color_mint"
+format = '[[($all_status$ahead_behind )](fg:color_bg1 bg:color_mint)]($style)'
+
+[nodejs]
+disabled = true
+symbol = ""
+style = "bg:color_purple"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_purple)]($style)'
+
+[c]
+disabled = true
+symbol = " "
+style = "bg:color_orange"
+format = '[[ $symbol( $version) ](fg:color_bg1 bg:color_orange)]($style)'
+
+[cpp]
+disabled = true
+symbol = " "
+style = "bg:color_orange_soft"
+format = '[[ $symbol( $version) ](fg:color_bg1 bg:color_orange_soft)]($style)'
+
+[rust]
+disabled = true
+symbol = ""
+style = "bg:color_red"
+format = '[[ $symbol( $version) ](fg:color_bg1 bg:color_red)]($style)'
+
+[golang]
+disabled = true
+symbol = ""
+style = "bg:color_mint"
+format = '[[ $symbol( $version) ](fg:color_bg1 bg:color_mint)]($style)'
+
+[php]
+disabled = true
+symbol = ""
+style = "bg:color_gray"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_gray)]($style)'
+
+[java]
+disabled = true
+symbol = ""
+style = "bg:color_orange_soft"
+format = '[[ $symbol( $version) ](fg:color_bg1 bg:color_orange_soft)]($style)'
+
+[kotlin]
+disabled = true
+symbol = ""
+style = "bg:color_purple"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_purple)]($style)'
+
+[haskell]
+disabled = true
+symbol = ""
+style = "bg:color_gray"
+format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_gray)]($style)'
+
+[python]
+disabled = true
+symbol = ""
+style = "bg:color_mint_soft"
+format = '[[ $symbol( $version) ](fg:color_bg1 bg:color_mint_soft)]($style)'
+
+[docker_context]
+disabled = true
+symbol = ""
+style = "bg:color_bg3"
+format = '[[ $symbol( $context) ](fg:color_orange_soft bg:color_bg3)]($style)'
+
+[conda]
+disabled = true
+style = "bg:color_bg3"
+format = '[[ $symbol( $environment) ](fg:color_mint bg:color_bg3)]($style)'
+
+[pixi]
+disabled = true
+style = "bg:color_bg3"
+format = '[[ $symbol( $version)( $environment) ](fg:color_fg0 bg:color_bg3)]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:color_bg2"
+format = '[[ ](fg:color_gray bg:color_bg2)]($style)'
+
+[line_break]
+disabled = true
+
+[character]
+disabled = true
+success_symbol = '[](bold fg:color_green)'
+error_symbol = '[](bold fg:color_red)'
+vimcmd_symbol = '[](bold fg:color_mint)'
+vimcmd_replace_one_symbol = '[](bold fg:color_orange_soft)'
+vimcmd_replace_symbol = '[](bold fg:color_red)'
+vimcmd_visual_symbol = '[](bold fg:color_purple)'
