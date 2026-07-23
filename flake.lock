@@ -156,22 +156,6 @@
         "type": "github"
       }
     },
-    "opencode-tap": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1782460392,
-        "narHash": "sha256-YsZfG3JjeDEppECfBcrGg8TCtZUTZVK3qMoyzr4KsZQ=",
-        "owner": "anomalyco",
-        "repo": "homebrew-tap",
-        "rev": "99c8fa1b4fb4a47b17e3e976794602e809d42b38",
-        "type": "github"
-      },
-      "original": {
-        "owner": "anomalyco",
-        "repo": "homebrew-tap",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "aerospace-tap": "aerospace-tap",
@@ -181,8 +165,7 @@
         "homebrew-core": "homebrew-core",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
-        "nixpkgs": "nixpkgs",
-        "opencode-tap": "opencode-tap"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

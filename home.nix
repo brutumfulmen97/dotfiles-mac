@@ -32,6 +32,9 @@
   home.file.".config/zed".source =
     ./dotfiles/zed;
 
+  home.file.".config/nvim".source =
+    ./dotfiles/nvim;
+
   home.file.".config/karabiner/karabiner.json" = {
     source = ./dotfiles/karabiner.json;
     force = true;

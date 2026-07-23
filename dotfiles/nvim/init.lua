@@ -1,0 +1,8 @@
+require 'config.options'
+require 'config.plugins'
+require 'config.keymaps'
+require 'config.ui'
+require 'config.search'
+require 'config.dashboard'
+require 'config.languages'
+require 'config.events'

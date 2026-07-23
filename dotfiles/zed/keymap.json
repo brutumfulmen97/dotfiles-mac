@@ -9,6 +9,7 @@
   {
     "context": "(Workspace || Editor) &&  vim_mode == normal",
     "bindings": {
+      "space space": "file_finder::Toggle",
       "space e": "workspace::ToggleRightDock",
       "space E": "workspace::ToggleLeftDock",
       "space c a": "editor::ToggleCodeActions",
@@ -30,14 +31,6 @@
     "context": "(Workspace || Editor) &&  vim_mode == insert",
     "bindings": {
       "cmd-s": "workspace::Save",
-    },
-  },
-  {
-    "context": "(Workspace || Editor) && (vim_mode == insert)",
-    "bindings": {
-      "j j": "vim::SwitchToNormalMode",
-      "j k": "vim::SwitchToNormalMode",
-      "k k": "vim::SwitchToNormalMode",
     },
   },
   {

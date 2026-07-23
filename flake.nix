@@ -24,11 +24,6 @@
       flake = false;
     };
 
-    opencode-tap = {
-      url = "github:anomalyco/homebrew-tap";
-      flake = false;
-    };
-
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -45,7 +40,6 @@
     homebrew-core,
     homebrew-cask,
     aerospace-tap,
-    opencode-tap,
     felixkratz-formulae,
     home-manager,
   }:
@@ -109,7 +103,6 @@
 
         brews = [
           "borders"
-          "opencode"
         ];
 
         onActivation.cleanup = "zap";
@@ -147,7 +140,6 @@
               "homebrew/homebrew-cask" = homebrew-cask;
               "nikitabobko/tap" = aerospace-tap;
               "FelixKratz/formulae" = felixkratz-formulae;
-              "anomalyco/tap" = opencode-tap;
             };
 
             mutableTaps = true;

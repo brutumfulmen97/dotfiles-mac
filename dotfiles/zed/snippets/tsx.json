@@ -1,7 +1,25 @@
 {
   "React component": {
     "prefix": "rfc",
-    "body": ["\"use client\";\n\nimport type { FC } from \"react\";\n\ntype Props = {};\n\nconst Component: FC<Props> = () => {\nreturn <div>Component</div>;\n};\n\nexport { Component };", "$0"],
-    "description": "Creates a React functional component"
-  }
+    "body": [
+      "\"use client\";\n\nimport type { FC } from \"react\";\n\ntype Props = {};\n\nconst Component: FC<Props> = () => {\nreturn <div>Component</div>;\n};\n\nexport { Component };",
+      "$0",
+    ],
+    "description": "Creates a React functional component",
+  },
+  "React useEffect": {
+    "prefix": "ue",
+    "body": ["useEffect(() => {\n\n}, []);", "$0"],
+    "description": "Adds use effect boilerplate",
+  },
+  "React useTransition": {
+    "prefix": "ut",
+    "body": ["const [isPending, startTransition] = useTransition();", "$0"],
+    "description": "Adds use effect boilerplate",
+  },
+  "React useState": {
+    "prefix": "us",
+    "body": ["const [state, setState] = useState();", "$0"],
+    "description": "Adds use effect boilerplate",
+  },
 }

@@ -44,27 +44,27 @@
       "panel.focused_border": "#fff",
       "syntax": {
         "keyword": {
-          "color": "#f5a191",
+          "color": "#7fbbb3",
           "font_style": "italic",
           "font_weight": 600,
         },
         "operator": {
-          "color": "#ea83a5",
+          "color": "#D5A9C9",
           "font_style": "normal",
           "font_weight": 400,
         },
         "attribute": {
-          "color": "#fae0d2",
+          "color": "#A9D5CB",
           "font_style": "normal",
           "font_weight": 400,
         },
         "property": {
-          "color": "#f3defa",
+          "color": "#A9D5B5",
           "font_style": "normal",
           "font_weight": 400,
         },
         "variable": {
-          "color": "#f3defa",
+          "color": "#A9D5B5",
           "font_style": "normal",
           "font_weight": 400,
         },
