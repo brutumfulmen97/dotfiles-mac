@@ -31,6 +31,11 @@ vim.diagnostic.config {
   float = { border = 'rounded', source = 'if_many' },
 }
 
-local spell_directory = vim.fs.joinpath(vim.fn.stdpath 'config', 'spell')
-vim.fn.mkdir(spell_directory, 'p')
-vim.o.spellfile = vim.fs.joinpath(spell_directory, 'en.utf-8.add')
+local data_path = vim.fn.stdpath("data")
+local spell_path = data_path .. "/spell"
+
+if vim.fn.isdirectory(spell_path) == 0 then
+  vim.fn.mkdir(spell_path, "p")
+end
+
+vim.opt.spellfile = spell_path .. "/en.utf-8.add"

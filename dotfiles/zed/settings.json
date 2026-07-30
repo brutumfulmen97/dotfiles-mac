@@ -192,6 +192,7 @@
   //    "never"
   "seed_search_query_from_cursor": "always",
   "use_smartcase_search": false,
+  "use_on_type_format": false,
   // Inlay hint related settings
   "inlay_hints": {
     // Global switch to toggle hints on and off, switched off by default.
@@ -358,7 +359,7 @@
     // For example: typing `:wave:` gets replaced with `👋`.
     "auto_replace_emoji_shortcode": true,
   },
-  "use_autoclose": false,
+  "use_autoclose": true,
   // Whether the screen sharing icon is shown in the os status bar.
   "show_call_status_icon": false,
   // Whether to use language servers to provide code intelligence.
@@ -988,7 +989,7 @@
     },
     "TypeScript": {
       // "language_servers": ["tsgo", "vtsls", "biome"],
-      "language_servers": ["vtsls", "biome"],
+      "language_servers": ["vtsls", "biome", "typescript-ls"],
       "formatter": {
         "language_server": {
           "name": "biome",
@@ -1000,6 +1001,7 @@
       },
       "tab_size": 2,
       "hard_tabs": false,
+      "use_on_type_format": false,
     },
     "JSX": {
       "formatter": {
@@ -1015,11 +1017,17 @@
       "hard_tabs": false,
     },
     "TSX": {
-      "language_servers": ["vtsls", "biome", "tailwindcss-language-server"],
+      "language_servers": [
+        "vtsls",
+        "biome",
+        "tailwindcss-language-server",
+        "typescript-ls",
+      ],
       // "language_servers": ["tsgo", "vtsls", "biome"],
       "inlay_hints": {
         "enabled": false,
       },
+      "use_on_type_format": false,
       "prettier": {
         "allowed": true,
       },
@@ -1191,4 +1199,8 @@
   "ssh_connections": [],
   // Configures context servers for use in the Assistant.
   "context_servers": {},
+  "colorize_brackets": true,
+  "sticky_scroll": {
+    "enabled": true,
+  },
 }
