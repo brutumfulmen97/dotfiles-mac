@@ -24,6 +24,7 @@
   },
   "status_bar": {
     "cursor_position_button": false,
+    "show_active_file": true,
   },
   "show_edit_predictions": false,
   "vim_mode": true,
@@ -73,11 +74,13 @@
   },
   "toolbar": {
     // Whether to show breadcrumbs.
-    "breadcrumbs": true,
+    "breadcrumbs": false,
     // Whether to show quick action buttons.
     "quick_actions": false,
     // Whether to show the Selections menu in the editor toolbar
     "selections_menu": false,
+    "agent_review": false,
+    "code_actions": false,
   },
   "scrollbar": {
     // When to show the scrollbar in the editor.
@@ -137,6 +140,7 @@
     "folds": false,
     "breakpoints": false,
     "min_line_number_digits": 2,
+    "bookmarks": false,
   },
   "indent_guides": {
     /// Whether to show indent guides in the editor.
@@ -601,7 +605,7 @@
     //     }
     "shell": "system",
     // Where to dock terminals panel. Can be `left`, `right`, `bottom`.
-    "dock": "bottom",
+    "dock": "left",
     // Default width when the terminal is docked to the left or right.
     "default_width": 640,
     // Default height when the terminal is docked to the bottom.
@@ -738,6 +742,7 @@
     // Default: 10_000, maximum: 100_000 (all bigger values set will be treated as 100_000), 0 disables the scrolling.
     // Existing terminals will not pick up this change until they are recreated.
     // "max_scroll_history_lines": 10000,
+    "font_family": "JetBrainsMono Nerd Font Mono",
   },
   "code_actions_on_format": {},
   /// Settings related to running tasks.
@@ -988,8 +993,7 @@
       "hard_tabs": false,
     },
     "TypeScript": {
-      // "language_servers": ["tsgo", "vtsls", "biome"],
-      "language_servers": ["vtsls", "biome", "typescript-ls"],
+      "language_servers": ["biome", "typescript-ls", "vtsls"],
       "formatter": {
         "language_server": {
           "name": "biome",
@@ -1018,12 +1022,11 @@
     },
     "TSX": {
       "language_servers": [
-        "vtsls",
         "biome",
-        "tailwindcss-language-server",
         "typescript-ls",
+        "vtsls",
+        "tailwindcss-language-server",
       ],
-      // "language_servers": ["tsgo", "vtsls", "biome"],
       "inlay_hints": {
         "enabled": false,
       },
@@ -1127,6 +1130,8 @@
     "cursor_shape": {
       "insert": "hollow",
     },
+    "gdefault": true,
+    "use_system_clipboard": "always",
   },
   "cursor_blink": false,
   // The server to connect to. If the environment variable

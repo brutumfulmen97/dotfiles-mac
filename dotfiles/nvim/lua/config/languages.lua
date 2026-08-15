@@ -4,13 +4,13 @@ require('mason-tool-installer').setup {
     'biome', 'alejandra', 'css-lsp', 'docker-compose-language-service', 'dockerfile-language-server',
     'gopls', 'goimports', 'html-lsp', 'json-lsp', 'just-lsp', 'marksman', 'nil', 'ruff',
     'rust-analyzer', 'sqls', 'svelte-language-server', 'taplo', 'tailwindcss-language-server',
-    'tree-sitter-cli', 'tsgo', 'yaml-language-server',
+    'tree-sitter-cli', 'yaml-language-server',
   },
 }
 
 local servers = {
-  'biome', 'cssls', 'docker_compose_language_service', 'dockerls', 'gopls', 'html', 'jsonls',
-  'just', 'marksman', 'nil_ls', 'ruff', 'rust_analyzer', 'sqls', 'svelte', 'taplo',
+  'biome', 'cssls', 'docker_compose_language_service', 'dockerls', 'eslint', 'gopls', 'html', 'jsonls',
+  'just', 'marksman', 'nil_ls', 'oxlint', 'ruff', 'rust_analyzer', 'sqls', 'svelte', 'taplo',
   'tailwindcss', 'yamlls',
 }
 for _, server in ipairs(servers) do
@@ -28,29 +28,37 @@ vim.lsp.config('tsgo', {
 vim.list_extend(servers, { 'tsgo' })
 vim.lsp.enable(servers)
 
+local function javascript_formatters(bufnr)
+  local filename = vim.api.nvim_buf_get_name(bufnr)
+  if vim.fs.find({ 'biome.json', 'biome.jsonc', '.biome.json', '.biome.jsonc' }, { path = filename, upward = true, type = 'file' })[1] then
+    return { 'biome' }
+  end
+  if vim.fs.find({ '.prettierrc', '.prettierrc.json', '.prettierrc.yaml', '.prettierrc.yml', '.prettierrc.js', '.prettierrc.cjs', '.prettierrc.mjs', 'prettier.config.js', 'prettier.config.cjs', 'prettier.config.mjs', 'prettier.config.ts' }, { path = filename, upward = true, type = 'file' })[1] then
+    return { 'prettier' }
+  end
+  if vim.fs.find({ '.oxfmtrc.json', '.oxfmtrc.jsonc', 'oxfmt.config.ts' }, { path = filename, upward = true, type = 'file' })[1] then
+    return { 'oxfmt' }
+  end
+  return { 'biome' }
+end
+
 local telescope = require 'telescope.builtin'
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(event)
-    local map = function(keys, action, description)
-      vim.keymap.set('n', keys, action, { buffer = event.buf, desc = description })
-    end
-    map('gd', telescope.lsp_definitions, 'Go to definition')
-    map('gi', telescope.lsp_implementations, 'Go to implementation')
-    map('gr', telescope.lsp_references, 'Find references')
-    map('K', vim.lsp.buf.hover, 'Hover documentation')
-    map('<leader>gr', vim.lsp.buf.rename, 'Rename symbol')
-    map('<leader>ca', vim.lsp.buf.code_action, 'Code actions')
-  end,
-})
+vim.keymap.set('n', 'gd', telescope.lsp_definitions, { desc = 'Go to definition' })
+vim.keymap.set('n', 'gi', telescope.lsp_implementations, { desc = 'Go to implementation' })
+vim.keymap.set('n', 'gr', telescope.lsp_references, { desc = 'Find references' })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'Hover documentation' })
+vim.keymap.set('n', 'gh', vim.lsp.buf.hover, { desc = 'Hover documentation' })
+vim.keymap.set('n', '<leader>gr', vim.lsp.buf.rename, { desc = 'Rename symbol' })
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code actions' })
 
 require('conform').setup {
   format_on_save = { timeout_ms = 1000, lsp_format = 'never' },
   formatters_by_ft = {
-    javascript = { 'biome' },
-    javascriptreact = { 'biome' },
+    javascript = javascript_formatters,
+    javascriptreact = javascript_formatters,
     go = { 'goimports' },
-    typescript = { 'biome' },
-    typescriptreact = { 'biome' },
+    typescript = javascript_formatters,
+    typescriptreact = javascript_formatters,
     json = { 'biome' },
     jsonc = { 'biome' },
     nix = { 'alejandra' },
@@ -61,8 +69,16 @@ require('conform').setup {
 }
 vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end, { desc = 'Format buffer' })
 
-require('nvim-treesitter').install {
+local parsers = {
   'css', 'csv', 'dockerfile', 'go', 'html', 'javascript', 'json', 'just', 'lua', 'make',
   'markdown', 'markdown_inline', 'nix', 'python', 'rust', 'sql', 'svelte', 'toml', 'tsx',
   'typescript', 'vim', 'vimdoc', 'yaml',
 }
+require('nvim-treesitter').install(parsers):await(function()
+  for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(buffer) then
+      local language = vim.treesitter.language.get_lang(vim.bo[buffer].filetype)
+      if language then pcall(vim.treesitter.start, buffer, language) end
+    end
+  end
+end)

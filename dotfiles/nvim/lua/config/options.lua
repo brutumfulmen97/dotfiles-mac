@@ -22,6 +22,31 @@ vim.o.spell = true
 vim.o.spelllang = 'en_us'
 vim.o.splitright = true
 vim.o.splitbelow = true
+vim.o.expandtab = true
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
+vim.cmd 'syntax enable'
+
+local function set_default_indentation(buffer)
+  local filename = vim.api.nvim_buf_get_name(buffer)
+  if filename ~= '' and vim.fs.find('.editorconfig', { path = filename, upward = true, type = 'file' })[1] then return end
+  vim.bo[buffer].expandtab = true
+  vim.bo[buffer].tabstop = 2
+  vim.bo[buffer].shiftwidth = 2
+  vim.bo[buffer].softtabstop = 2
+end
+
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(args) set_default_indentation(args.buf) end,
+})
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.api.nvim_buf_is_loaded(buffer) then set_default_indentation(buffer) end
+    end
+  end,
+})
 
 vim.diagnostic.config {
   severity_sort = true,

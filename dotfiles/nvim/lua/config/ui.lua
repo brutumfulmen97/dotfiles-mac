@@ -1,5 +1,5 @@
 require('vesper').setup {
-  transparent = true,
+  transparent = false,
   italics = { comments = false, keywords = true, functions = false, strings = false, variables = false },
   overrides = {
     FloatBorder = { fg = '#ffffff' },
@@ -20,6 +20,68 @@ vim.cmd.colorscheme 'vesper'
 require('nvim-web-devicons').setup { color_icons = true, default = true, strict = true }
 require('Comment').setup()
 require('mini.ai').setup()
+
+local function open_file(state)
+  local utils = require 'neo-tree.utils'
+  local commands = require 'neo-tree.sources.common.commands'
+  local window, is_neo_tree_window = utils.get_appropriate_window(state)
+  if is_neo_tree_window then
+    commands.open(state)
+    return
+  end
+
+  vim.api.nvim_set_current_win(window)
+  if not vim.bo.modified then
+    commands.open(state)
+    return
+  end
+
+  vim.ui.select({ 'Save and open', 'Discard and open', 'Cancel' }, {
+    prompt = 'Unsaved changes',
+  }, function(choice)
+    if choice == 'Save and open' then
+      vim.cmd.write()
+      commands.open(state)
+    elseif choice == 'Discard and open' then
+      vim.cmd 'edit!'
+      commands.open(state)
+    end
+  end)
+end
+
+require('neo-tree').setup {
+  close_if_last_window = true,
+  popup_border_style = 'rounded',
+  enable_git_status = true,
+  enable_diagnostics = true,
+  filesystem = {
+    follow_current_file = { enabled = true },
+    hijack_netrw_behavior = 'disabled',
+    filtered_items = {
+      hide_dotfiles = false,
+      hide_gitignored = false,
+    },
+    use_libuv_file_watcher = true,
+  },
+  window = {
+    position = 'right',
+    width = 38,
+    mappings = {
+      ['<cr>'] = open_file,
+      ['H'] = 'toggle_hidden',
+      ['R'] = 'refresh',
+      ['?'] = 'show_help',
+    },
+  },
+}
+
+require('which-key').setup {
+  preset = 'helix',
+  delay = 0,
+  win = {
+    border = 'rounded',
+  },
+}
 
 require('gitsigns').setup {
   on_attach = function(bufnr)

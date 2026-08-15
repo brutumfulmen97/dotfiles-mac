@@ -10,6 +10,8 @@
     "context": "(Workspace || Editor) &&  vim_mode == normal",
     "bindings": {
       "space space": "file_finder::Toggle",
+      "space o r": "projects::OpenRecent",
+      "space t t": "workspace::NewCenterTerminal",
       "space e": "workspace::ToggleRightDock",
       "space E": "workspace::ToggleLeftDock",
       "space c a": "editor::ToggleCodeActions",

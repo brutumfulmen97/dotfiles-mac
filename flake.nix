@@ -24,6 +24,11 @@
       flake = false;
     };
 
+    swipeaerospace-tap = {
+      url = "github:MediosZ/homebrew-tap";
+      flake = false;
+    };
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +45,7 @@
     homebrew-core,
     homebrew-cask,
     aerospace-tap,
+    swipeaerospace-tap,
     felixkratz-formulae,
     home-manager,
   }:
@@ -54,6 +60,13 @@
 
       environment.systemPackages = [
         pkgs.neovim
+        pkgs.biome
+        pkgs.eslint
+        pkgs.oxfmt
+        pkgs.oxlint
+        pkgs.prettier
+        pkgs.typescript-go
+        pkgs.vscode-langservers-extracted
         pkgs.tmux
         pkgs.ghostty-bin
         pkgs.zed-editor
@@ -77,7 +90,7 @@
         pkgs.btop
         pkgs.delta
         pkgs.starship
-        pkgs.ollama
+        # pkgs.ollama
       ];
 
       fonts.packages = with pkgs; [
@@ -94,6 +107,7 @@
           "thebrowsercompany-dia"
           "google-chrome"
           "nikitabobko/tap/aerospace"
+          "mediosz/tap/swipeaerospace"
           "raycast"
           "orbstack"
           "1password"
@@ -139,6 +153,7 @@
               "homebrew/homebrew-core" = homebrew-core;
               "homebrew/homebrew-cask" = homebrew-cask;
               "nikitabobko/tap" = aerospace-tap;
+              "MediosZ/tap" = swipeaerospace-tap;
               "FelixKratz/formulae" = felixkratz-formulae;
             };
 

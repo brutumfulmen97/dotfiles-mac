@@ -61,6 +61,8 @@ require('blink.cmp').setup {
 
 local telescope = require 'telescope.builtin'
 vim.keymap.set('n', '<leader><leader>', telescope.find_files, { desc = 'Find files' })
-vim.keymap.set('n', '<leader>,', telescope.oldfiles, { desc = 'Recent files' })
+vim.keymap.set('n', '<leader>,', function()
+  telescope.oldfiles { cwd = vim.fn.getcwd(), only_cwd = true }
+end, { desc = 'Recent project files' })
 vim.keymap.set('n', '<leader>sg', telescope.live_grep, { desc = 'Search text' })
 vim.keymap.set('n', '<leader>sd', telescope.diagnostics, { desc = 'Search diagnostics' })
